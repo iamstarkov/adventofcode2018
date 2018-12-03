@@ -1,4 +1,4 @@
-(def input "+5
+(def raw "+5
 -11
 +17
 +9
@@ -995,4 +995,7 @@
 +3
 +75248")
 
-(println (reduce + 0 (map read-string (clojure.string/split-lines input))))
+
+(def input (map read-string (clojure.string/split-lines raw)))
+
+(println (reduce + 0 input))
