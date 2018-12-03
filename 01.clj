@@ -995,7 +995,26 @@
 +3
 +75248")
 
-
 (def input (map read-string (clojure.string/split-lines raw)))
 
-(println (reduce + 0 input))
+
+(defn part1 [deltas] (reduce + 0 deltas))
+
+(defn first-duplicate [freqs]
+  (loop [freqs freqs
+         visited #{}]
+    (let [freq (first freqs)]
+      (if (contains? visited freq)
+        freq
+        (recur
+          (rest freqs)
+          (conj visited freq))))))
+
+(defn part2 [diffs]
+  (->> diffs
+    cycle
+    (reductions +)
+    first-duplicate))
+
+(println "Part 1:" (part1 input))
+(println "Part 2:" (part2 input))
